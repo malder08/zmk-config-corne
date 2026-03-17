@@ -29,6 +29,28 @@
                         , <&macro_tap &kp RIGHT>
                         , <&macro_release &kp LGUI &kp LALT>;
                 };
+
+                next_win: next_win { // Switch windows in same app (Cmd + `)
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&macro_press &kp LGUI>, <&macro_tap &kp GRAVE>, <&macro_release &kp LGUI>;
+                };
+
+                focus_editor: focus_editor {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&macro_press &kp LCTRL>, <&macro_tap &kp N1>, <&macro_release &kp LCTRL>;
+                };
+                focus_terminal: focus_terminal {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&macro_press &kp LCTRL>, <&macro_tap &kp GRAVE>, <&macro_release &kp LCTRL>;
+                };
+                focus_agent: focus_agent {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&macro_press &kp LGUI &kp LALT>, <&macro_tap &kp I>, <&macro_release &kp LGUI &kp LALT>;
+                };
         };
 
         keymap {
@@ -67,13 +89,13 @@
                         display-name = "Raise Layer";
 // -----------------------------------------------------------------------------------------
 // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
-// | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
+// | CTRL |     |n_win|tab_l|tab_r|     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
+// | SHFT |     |     |fagen|fterm|fedit|   |  _  |  +  |  {  |  }  | "|" |  ~   |
 //                    | GUI |     | SPC |   | ENT |     | ALT |
                         bindings = <
    &kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
-   &kp LCTRL &trans   &trans &tab_left   &tab_right   &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
-   &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
+   &kp LCTRL &trans   &next_win &tab_left   &tab_right   &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
+   &kp LSHFT &trans   &trans &focus_agent &focus_terminal &focus_editor  &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
                              &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
                         >;
                 };
